@@ -1,9 +1,51 @@
 package model;
 
 import java.sql.*;
+import java.util.*;
+
 
 public class EmployeesDao {
-	public int selectEmployeesCount() {
+	public List<Employees> selectEmployeesListByLimit(int limit){
+		System.out.println("selectEmployeesListByLimit param limit : " + limit);
+		List<Employees> list = new ArrayList<Employees>();
+		String sql = "select emp_no, birth_date, first_name, last_name, gender, hire_date from employees limit ?";
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+			
+		//예외구절 데이터베이스에서 에러가 날 수 있음 finally sql종료 선언 list값 리턴
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/employees","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, limit);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Employees employees = new Employees();
+				employees.setEmpNo(rs.getInt("emp_no"));
+				employees.setBirthDate(rs.getString("birth_date"));
+				employees.setFirstName(rs.getString("first_name"));
+				employees.setLastName(rs.getString("last_name"));
+				employees.setGender(rs.getString("gender"));
+				employees.setHireDate(rs.getString("hire_date"));
+				list.add(employees);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}		
+	
+	//employees의 카운트를 구하는 메소드
+	public int selectEmployeesRowCount() {
 		int count = 0;
 		final String sql = "select count(*) from employees ";
 		Connection conn = null;

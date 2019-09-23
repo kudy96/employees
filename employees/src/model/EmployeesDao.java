@@ -3,6 +3,8 @@ package model;
 import java.sql.*;
 import java.util.*;
 
+import vo.Employees;
+
 
 public class EmployeesDao {
 	

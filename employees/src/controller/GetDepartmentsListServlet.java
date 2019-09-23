@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DepartmentsDao;
+
 import java.util.*;
 
 import vo.Departments;
-import vo.DepartmentsDao;
 
 //절대주소 서버기준
 @WebServlet("/departments/getDepartmentsList")

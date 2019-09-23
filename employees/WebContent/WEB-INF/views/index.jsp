@@ -2,6 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 ul.b {
   list-style-type: square;
@@ -17,7 +24,45 @@ ul.b {
 		3. 스크립트릿 : jstl(사용자 생성한 태그)
 		4. 표현식 : el
 	  -->
+	<div class="container col-md-8" >
 	<h1>index</h1>
+	<h2>테이블 정보</h2>
+	
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>테이블이름</th>
+					<th>전체 행의 수</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>departments</td>
+					<td>${departmentsRowCount}</td>
+				</tr>
+				<tr>
+					<td>employees</td>
+					<td>${employeesRowCount }</td>
+				</tr>
+				<tr>
+					<td>dept_emp</td>
+					<td>${deptEmpRowCount }</td>
+				</tr>
+				<tr>
+					<td>dept_manager</td>
+					<td>${deptManagerRowCount }</td>
+				</tr>
+				<tr>
+					<td>titles</td>
+					<td>${titlesRowCount }</td>
+				</tr>
+					<tr>
+					<td>salaries</td>
+					<td>${salariesRowCount }</td>
+				</tr>
+			</tbody>
+		</table>
 	
 	<!-- WEB APP 네비게이션 -->
 	<div>
@@ -31,7 +76,7 @@ ul.b {
 			</li>
 		</ul>
 	</div>
-	
+	</div>
 	
 	<div>	
 		표현식 : employees table row count : ${requestScope.employeesRowCount }

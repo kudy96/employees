@@ -1,4 +1,4 @@
-package model;
+package vo;
 
 public class Employees {
 	private int empNo;

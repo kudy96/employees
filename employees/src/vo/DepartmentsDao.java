@@ -14,7 +14,7 @@ public class DepartmentsDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select dept_no, dept_name from departments";
+		String sql = "select dept_no, dept_name from departments order by dept_no asc";
 		
 		//예외발생 구절 최종적으로 sql종료 
 		try {

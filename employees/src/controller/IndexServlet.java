@@ -32,6 +32,8 @@ public class IndexServlet extends HttpServlet {
 		employeesDao = new EmployeesDao();
 		//Dao의 리턴값
 		int employeesRowCount = employeesDao.selectEmployeesRowCount();
+		int maxEmpNo = employeesDao.selectEmpNo("max");
+		int minEmpNo = employeesDao.selectEmpNo("min");
 		
 		deptEmpDao = new DeptEmpDao();
 		int deptEmpRowCount = deptEmpDao.selectdeptEmpRowCount();
@@ -52,6 +54,8 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("deptManagerRowCount", deptManagerRowCount);
 		request.setAttribute("titlesRowCount", titlesRowCount);
 		request.setAttribute("salariesRowCount", salariesRowCount);
+		request.setAttribute("maxEmpNo", maxEmpNo);
+		request.setAttribute("minEmpNo", minEmpNo);
 		
 		//employeesRowCount의 저장된 값을 index에 보여줌 
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);

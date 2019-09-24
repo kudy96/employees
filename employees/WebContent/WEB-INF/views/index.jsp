@@ -24,7 +24,7 @@ ul.b {
 		3. 스크립트릿 : jstl(사용자 생성한 태그)
 		4. 표현식 : el
 	  -->
-	<div class="container col-md-8" >
+<div class="container col-md-8" >
 	<h1>index</h1>
 	<h2>테이블 정보</h2>
 	
@@ -80,9 +80,22 @@ ul.b {
 			<li>
 				<a href="${pageContext.request.contextPath}/salaries/getSalariesStatistics">연봉 통계값(count,sum,avg,max,min,std)</a>
 			</li>
+			<li>
+				<a href="${pageContext.request.contextPath}/employees/getEmployeesCountByGender">사원 수(성별 group by gender)</a>
+			</li>
+			<li>
+				<a href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo">현재 부서별 사원수</a>
+			</li>
 		</ul>
 	</div>
-	</div>
+		<div>
+			<form method="post" action="${pageContext.request.contextPath}/employees/getEmployeesListBetween">
+				<input type="number" name="begin">~<input type="number" name="end">
+				<button type="submit">사원 목록 between and</button>
+				(${minEmpNo } ~ ${maxEmpNo})
+			</form>
+		</div>
+</div>
 	
 	<div>	
 		표현식 : employees table row count : ${requestScope.employeesRowCount }

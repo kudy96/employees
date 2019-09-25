@@ -13,6 +13,45 @@ import vo.Employees;
 
 public class EmployeesDao {
 	
+	public int selectlastPage() {
+		return 0;
+	}
+	
+	public List<Employees> selectEmployeesListByPage(int currentPage, int rowPerPage){
+		List<Employees> list = new ArrayList<Employees>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from employees limit ?,?";
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			int startRow = (currentPage-1)*rowPerPage;
+			stmt.setInt(1, startRow);
+			stmt.setInt(2, rowPerPage);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Employees employees = new Employees();
+				employees.setEmpNo(rs.getInt("emp_no"));
+				employees.setBirthDate(rs.getString("birth_date"));
+				employees.setFirstName(rs.getString("first_name"));
+				employees.setLastName(rs.getString("last_name"));
+				employees.setGender(rs.getString("gender"));
+				employees.setHireDate(rs.getString("hire_date"));
+				list.add(employees);	
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.close(rs, stmt, conn);
+			
+		}
+		return list;
+	}
+	
+	
 	public List<Map<String, Object>> selectEmployeesCountGroupByGender(){
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Connection conn = null;

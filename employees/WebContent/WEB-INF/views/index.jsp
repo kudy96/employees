@@ -86,6 +86,9 @@ ul.b {
 			<li>
 				<a href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo">현재 부서별 사원수</a>
 			</li>
+			<li>
+				<a href="${pageContext.request.contextPath}/employees/getEmployeesListByPage">사원목록 페이징(10명)</a>
+			</li>
 		</ul>
 	</div>
 		<div>

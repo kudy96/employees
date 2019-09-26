@@ -12,6 +12,29 @@ import db.DBHelper;
 import vo.Employees;
 
 public class EmployeesDao {
+	public int login(int empNo, String firstName, String lastName) {
+		int sessionEmpNo = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;                                                                               
+		ResultSet rs = null;
+		String sql = "select * from employees where emp_no=? and first_name=? and last_name=?";
+		
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, empNo);
+			stmt.setString(2, firstName);
+			stmt.setString(3, lastName);
+			rs = stmt.executeQuery();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.close(rs, stmt, conn);
+		}
+		return sessionEmpNo;
+	}
+	
 	
 	public int selectlastPage() {
 		return 0;
@@ -50,7 +73,6 @@ public class EmployeesDao {
 		}
 		return list;
 	}
-	
 	
 	public List<Map<String, Object>> selectEmployeesCountGroupByGender(){
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -139,11 +161,7 @@ public class EmployeesDao {
 		return empNo;
 	}
 	
-	
-	
-	
-	
-	
+		
 	public List<Employees> selectEmployeesListOrderBy(String order) {
 		System.out.println("selectEmployeesListOrderBy param order : " + order);
 		List<Employees> list = new ArrayList<Employees>();
